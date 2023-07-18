@@ -59,10 +59,6 @@ class TestBooksCollector:
         assert collector.get_list_of_favorites_books() == []
 
 
-dsfg
-
-
-
 
 
 
