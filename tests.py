@@ -1,4 +1,8 @@
+import pytest
 from main import BooksCollector
+books =['Мастер и Маргаритта', 'Сила', 'Поезда', 'Прогресс']
+
+
 class TestBooksCollector:
     def test_set_book_genre_name_and_genre_show_book_genre(self):
         collector = BooksCollector()
@@ -31,11 +35,13 @@ class TestBooksCollector:
         collector.set_book_genre('Кора', 'Ужасы')
         assert collector.get_books_for_children() == ['Винни Пух']
 
-    def test_add_book_in_favorites_new_book_in_favorites_return_favorite_book(self):
+
+    @pytest.mark.parametrize('book',books)
+    def test_add_book_in_favorites_new_book_in_favorites_return_favorite_book(self, book):
         collector = BooksCollector()
-        collector.add_new_book('Евгений Онегин')
-        collector.add_book_in_favorites('Евгений Онегин')
-        assert collector.get_list_of_favorites_books() == ['Евгений Онегин']
+        collector.add_new_book(book)
+        collector.add_book_in_favorites(book)
+        assert collector.get_list_of_favorites_books() == [book]
 
     def test_delete_book_from_favorites_add_favorite_book_return_list(self):
         collector = BooksCollector()
