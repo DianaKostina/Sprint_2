@@ -1,1 +1,20 @@
-# qa_python
+1. test_set_book_genre_name_and_genre_show_book_genre
+Проверка добавления книги и присвоения ей жанра. Соответствие книги и жанра
+2. test_set_book_genre_book_without_genre_has_no_genre
+Проверка отстуствия жанра у книги
+3. test_books_with_specific_genre_add_genre_comparison_genre
+Проверка поиска книги по жанру
+4. test_get_books_genre_add_book_genre_check_existent_book
+Проверка вывода всех книг 
+5. test_get_books_for_children_different_genres_show_for_children
+Проверка вывода книг для детей
+6. test_get_list_of_favorites_books_add_book_return_empty_list
+Добавление отсутствующей  книги в избранное
+7. test_delete_book_from_favorites_add_favorite_book_return_list
+Проверка удаления книги из избранного
+8. test_get_list_of_favorites_books_add_favorite_book_return_book
+Проверка наличия книги в избранном по названию
+9. test_delete_book_from_favorites_double_delete_not_existent_book
+Проверка удаления книги из избранного два раза, возврат пустого листа
+10. test_set_book_genre_name_and_genre_return_none
+Проверка добавления жанра несуществующей книге

@@ -1,24 +1,73 @@
+import pytest
 from main import BooksCollector
+books =['Мастер и Маргаритта', 'Сила', 'Поезда', 'Прогресс']
 
-# класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
-# обязательно указывать префикс Test
 class TestBooksCollector:
-
-    # пример теста:
-    # обязательно указывать префикс test_
-    # дальше идет название метода, который тестируем add_new_book_
-    # затем, что тестируем add_two_books - добавление двух книг
-    def test_add_new_book_add_two_books(self):
-        # создаем экземпляр (объект) класса BooksCollector
+    def test_set_book_genre_name_and_genre_show_book_genre(self):
         collector = BooksCollector()
+        collector.add_new_book('Граф Монте-Кристо')
+        collector.set_book_genre('Граф Монте-Кристо', 'Детективы')
+        assert collector.get_book_genre('Граф Монте-Кристо') == 'Детективы', 'У книги нет жанра'
 
-        # добавляем две книги
-        collector.add_new_book('Гордость и предубеждение и зомби')
-        collector.add_new_book('Что делать, если ваш кот хочет вас убить')
+    def test_set_book_genre_book_without_genre_has_no_genre(self):
+        collector = BooksCollector()
+        collector.add_new_book('Маша и Медведь')
+        assert collector.get_book_genre('Маша и Медведь') != 'Детективы'
 
-        # проверяем, что добавилось именно две
-        # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
-        assert len(collector.get_books_rating()) == 2
+    def test_books_with_specific_genre_add_genre_comparison_genre(self):
+        collector = BooksCollector()
+        collector.add_new_book('Шантарам')
+        collector.set_book_genre('Шантарам', 'Детективы')
+        assert collector.get_books_with_specific_genre('Детективы') == ['Шантарам']
 
-    # напиши свои тесты ниже
-    # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+    def test_get_books_genre_add_book_genre_check_existent_book(self):
+        collector = BooksCollector()
+        collector.add_new_book('Кора')
+        collector.set_book_genre('Кора', 'Ужасы')
+        assert collector.get_books_genre() == {'Кора': 'Ужасы'}
+        
+    def test_get_books_for_children_different_genres_show_for_children(self):
+        collector = BooksCollector()
+        collector.add_new_book('Винни Пух')
+        collector.set_book_genre('Винни Пух', 'Мультфильмы')
+        collector.add_new_book('Кора')
+        collector.set_book_genre('Кора', 'Ужасы')
+        assert collector.get_books_for_children() == ['Винни Пух']
+
+    @pytest.mark.parametrize('book',books)
+    def test_add_book_in_favorites_new_book_in_favorites_return_favorite_book(self, book):
+        collector = BooksCollector()
+        collector.add_new_book(book)
+        collector.add_book_in_favorites(book)
+        assert collector.get_list_of_favorites_books() == [book]
+
+    def test_delete_book_from_favorites_add_favorite_book_return_list(self):
+        collector = BooksCollector()
+        collector.add_new_book('Тихий Дон')
+        collector.add_book_in_favorites('Тихий Дон')
+        collector.delete_book_from_favorites('Тихий Дон')
+        assert collector.get_list_of_favorites_books() != ['Тихий Дон']
+
+    def test_get_list_of_favorites_books_add_book_return_empty_list(self):
+        collector = BooksCollector()
+        collector.add_book_in_favorites('Унесенные ветром')
+        assert collector.get_list_of_favorites_books() == []
+
+    def test_delete_book_from_favorites_double_delete_not_existent_book(self):
+        collector = BooksCollector()
+        collector.add_new_book('Погоня')
+        collector.add_book_in_favorites('Погоня')
+        collector.delete_book_from_favorites('Погоня')
+        collector.delete_book_from_favorites('Погоня')
+        assert collector.get_list_of_favorites_books() == []
+
+    def test_set_book_genre_name_and_genre_return_none(self):
+        collector = BooksCollector()
+        collector.set_book_genre('Лопух', 'Детективы')
+        assert collector.get_book_genre('Лопух') == None
+
+
+
+
+
+
