@@ -8,11 +8,13 @@
 Проверка вывода всех книг 
 5. test_get_books_for_children_different_genres_show_for_children
 Проверка вывода книг для детей
-6. test_add_book_in_favorites_new_book_in_favorites_return_favorite_book
-Проверка добавление книг в избранное, возврат книг в избранном после удаления добавленной книги
+6. test_get_list_of_favorites_books_add_book_return_empty_list
+Добавление отсутствующей  книги в избранное
 7. test_delete_book_from_favorites_add_favorite_book_return_list
 Проверка удаления книги из избранного
 8. test_get_list_of_favorites_books_add_favorite_book_return_book
 Проверка наличия книги в избранном по названию
 9. test_delete_book_from_favorites_double_delete_not_existent_book
 Проверка удаления книги из избранного два раза, возврат пустого листа
+10. test_set_book_genre_name_and_genre_return_none
+Проверка добавления жанра несуществующей книге
